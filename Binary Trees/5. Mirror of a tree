@@ -1,0 +1,95 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+class Binarytreenode{
+	public:
+		int data;
+		Binarytreenode*left;
+		Binarytreenode*right;
+		
+		Binarytreenode(int data)
+		{
+			this->data=data;
+			left=NULL;
+			right=NULL;
+		}
+		
+		~Binarytreenode()
+		{
+			delete left;
+			delete right;
+		}
+};
+
+Binarytreenode *takeinputlevelwise()
+{
+	int rootdata;
+	cout<<"enter the root data"<<endl;
+	cin>>rootdata;
+	if(rootdata==-1)
+	{
+		return NULL;
+	}
+	Binarytreenode *root=new Binarytreenode(rootdata);
+	queue<Binarytreenode*> pendingnodes;
+	pendingnodes.push(root);
+	while(!pendingnodes.empty())
+	{
+		Binarytreenode* front=pendingnodes.front();
+		pendingnodes.pop();
+		int leftchilddata;
+		cout<<"enter left child data of"<<front->data<<endl;
+		cin>>leftchilddata;
+		if(leftchilddata!=-1)
+		{
+			Binarytreenode* child=new Binarytreenode(leftchilddata);
+			front->left=child;
+			pendingnodes.push(child);
+		}
+		int rightchilddata;
+		cout<<"enter right child data of"<<front->data<<endl;
+		cin>>rightchilddata;
+		if(rightchilddata!=-1)
+		{
+			Binarytreenode* child=new Binarytreenode (rightchilddata);
+			front->right=child;
+			pendingnodes.push(child);
+		}
+	}
+	return root;
+}
+void inorder(Binarytreenode *root)
+{
+	if(root==NULL)
+	{
+		return;
+	}
+
+	inorder(root->left);
+		cout<<root->data<<" ";
+	inorder(root->right);
+}
+void mirror(Binarytreenode *root)
+{
+	if(root==NULL)
+	{
+		return;
+	}
+	if(root->right!=NULL&&root->left!=NULL)
+	{
+		swap(root->right,root->left);
+	}
+	mirror(root->left);
+	mirror(root->right);
+}
+int main()
+{
+	Binarytreenode *root=takeinputlevelwise();
+	inorder(root);
+	cout<<endl;
+	mirror(root);
+	cout<<endl;
+	inorder(root);
+	cout<<endl;
+}
