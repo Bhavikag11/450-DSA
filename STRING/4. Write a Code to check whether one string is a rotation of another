@@ -1,0 +1,43 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+bool rot(string a,string b)
+{
+	if(a.length()!=b.length())
+	{
+		return false;
+	}
+   queue<char>q1;
+   queue<char>q2;
+   for(int i=0;i<a.length();i++)
+   {
+   	  q1.push(a[i]);
+   }
+   for(int i=0;i<b.length();i++)
+   {
+   	  q2.push(b[i]);
+   }
+   int k=q2.size();
+   while(k--)
+   {
+   	  char c=q2.front();
+   	  q2.pop();
+   	  q2.push(c);
+   	  if(q1==q2)
+   	  {
+   	  	return true;
+		 }
+   }
+   return false;
+    
+}
+
+int main()
+{
+	string a;
+	string b;
+	cin>>a;
+	cin>>b;
+	cout<<rot(a,b);
+}
