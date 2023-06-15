@@ -1,0 +1,25 @@
+#include<iostream>
+#include<bits/stdc++.h>
+using namespace std;
+
+int main()
+{
+	int S,N,M;
+	cin>>S>>N>>M;
+	int x=S/7;
+	int y=S-x;
+	int req=M*S;
+	int days=req/N;
+	if(req%N!=0)
+	{
+		days++;
+	}
+	if(days<=y)
+	{
+		cout<<"Yes "<<days<<endl;
+	}
+	else
+	{
+		cout<<"No"<<endl;
+	}
+}
